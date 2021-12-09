@@ -8,11 +8,13 @@ let zombie = new ch.Zombie('Zombie');
 let daemon = new ch.Daemon('Daemon');
 
 test('Character Class Error (No type) ', () => {
-  expect(new ch.Character('Daemon', 'Test')).toEqual(new Error ("Некорректные аргументы"));
-})
+  const t = () => new ch.Character('Daemon', 'Test');
+  expect(t).toThrow(new Error ("Некорректные аргументы"));
+});
 test('Character Class Error (Invalid Name)', () => {
-  expect(new ch.Character('DaemonTestSword', 'Swordsman')).toEqual(new Error ("Некорректные аргументы"));
-})
+  const t = () => new ch.Character('DaemonTestSword', 'Swordsman');
+  expect(t).toThrow(new Error ("Некорректные аргументы"));
+});
 test('Set Damage for Person', () => {
   swordsman.damage(12); expect(swordsman.health).toBeCloseTo(89.2);
 })
@@ -23,7 +25,8 @@ test('Set Level for Person (Swordsman)', () => {
 
 test('Character 0 Health ', () => {
   swordsman.health = 0;
-  expect(swordsman.levelup()).toEqual(new Error ("Ошибка. Мертвый игрок не может получить уровень"));
+  const t = () => swordsman.levelup();
+  expect(t).toThrow(new Error ("Ошибка. Мертвый игрок не может получить уровень"));
 })
 
 test('Set Damage for Person (0 Health)', () => {
